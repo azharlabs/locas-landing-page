@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locas - Open Source AI Location Orchestrator</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom styles -->
+    <style>
+        .gradient-bg {
+            background: linear-gradient(90deg, #4338ca 0%, #6366f1 100%);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        .hero-image {
+            background-image: url('images/map-placeholder.png');
+            background-size: 80%;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 12px;
+            overflow: hidden;
+            /* box-shadow: 2px 8px 24px rgba(0.2, 0.2, 0.2, 0.2);  */
+            }
+
+        .map-marker {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+            }
+        }
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-900 bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <img src="images/logo.png" alt="Locas Logo" class="h-10 w-auto">
+                        <span class="ml-2 text-xl font-bold text-indigo-600">Locas <span class="ml-1 text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Open Source</span></span>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:space-x-8">
+                    <a href="https://app.locas.dev/" target="_blank" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300">Features</a>
+                    <a href="https://app.locas.dev/" target="_blank" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300">Use Cases</a>
+                    <a href="https://app.locas.dev/" target="_blank" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300">How It Works</a>
+                </div>
+                <div class="flex items-center">
+                    <a href="https://app.locas.dev/" target="_blank" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative overflow-hidden bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+                <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+                    <div class="sm:text-center lg:text-left">
+                        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                            <span class="block">Open Source AI</span>
+                            <span class="block text-indigo-600">Location Orchestrator</span>
+                        </h1>
+                        <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                            Make smarter decisions with our community-driven platform that orchestrates multiple AI services for powerful location analysis. From real estate assessment to business viability, harness the collective intelligence of open-source AI.
+                        </p>
+                        <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                            <div class="rounded-md shadow">
+                                <a href="https://app.locas.dev/" target="_blank" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+                                    Start Analyzing
+                                </a>
+                            </div>
+                            <div class="mt-3 sm:mt-0 sm:ml-3">
+                                <a href="https://app.locas.dev/" target="_blank" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
+                                    Learn More
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 hero-image">
+            <!-- Hero image -->
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div id="features" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Features</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Orchestrating AI for location intelligence
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Our open-source platform coordinates multiple AI services, geospatial APIs, and environmental data sources to deliver comprehensive location insights through a unified interface.
+                </p>
+            </div>
+
+            <div class="mt-10">
+                <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+                    <!-- Feature 1 -->
+                    <div class="feature-card p-6 bg-gray-50 rounded-xl border border-gray-200">
+                        <div class="w-12 h-12 rounded-md flex items-center justify-center bg-indigo-500 text-white">
+                            <i class="fas fa-map-marker-alt text-xl"></i>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-lg font-medium text-gray-900">Land Purchase Analysis</h3>
+                            <p class="mt-2 text-base text-gray-500">
+                                Evaluate land for purchase with insights on nearby amenities, services, and environmental factors.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="feature-card p-6 bg-gray-50 rounded-xl border border-gray-200">
+                        <div class="w-12 h-12 rounded-md flex items-center justify-center bg-indigo-500 text-white">
+                            <i class="fas fa-store text-xl"></i>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-lg font-medium text-gray-900">Business Viability</h3>
+                            <p class="mt-2 text-base text-gray-500">
+                                Determine if a location is suitable for your business with foot traffic, competition, and demographic analysis.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="feature-card p-6 bg-gray-50 rounded-xl border border-gray-200">
+                        <div class="w-12 h-12 rounded-md flex items-center justify-center bg-indigo-500 text-white">
+                            <i class="fas fa-cloud-sun text-xl"></i>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-lg font-medium text-gray-900">Environmental Data</h3>
+                            <p class="mt-2 text-base text-gray-500">
+                                Access air quality, pollen, and other environmental factors to make informed decisions.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="feature-card p-6 bg-gray-50 rounded-xl border border-gray-200">
+                        <div class="w-12 h-12 rounded-md flex items-center justify-center bg-indigo-500 text-white">
+                            <i class="fas fa-search-location text-xl"></i>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-lg font-medium text-gray-900">Proximity Search</h3>
+                            <p class="mt-2 text-base text-gray-500">
+                                Find nearby amenities like schools, hospitals, parks, and restaurants with detailed information.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class="feature-card p-6 bg-gray-50 rounded-xl border border-gray-200">
+                        <div class="w-12 h-12 rounded-md flex items-center justify-center bg-indigo-500 text-white">
+                            <i class="fas fa-chart-line text-xl"></i>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-lg font-medium text-gray-900">Rating System</h3>
+                            <p class="mt-2 text-base text-gray-500">
+                                Get numerical ratings for different factors to easily compare locations and make decisions.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 6 -->
+                    <div class="feature-card p-6 bg-gray-50 rounded-xl border border-gray-200">
+                        <div class="w-12 h-12 rounded-md flex items-center justify-center bg-indigo-500 text-white">
+                            <i class="fas fa-globe text-xl"></i>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-lg font-medium text-gray-900">AI Orchestration</h3>
+                            <p class="mt-2 text-base text-gray-500">
+                                Coordinate multiple AI services and APIs through a unified interface for seamless location intelligence.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Use Cases Section -->
+    <div id="use-cases" class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Use Cases</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Who can benefit from Locas
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Our platform is designed for various professionals who need location-based insights.
+                </p>
+            </div>
+
+            <div class="mt-10">
+                <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    <!-- Use Case 1 -->
+                    <div class="bg-white overflow-hidden shadow rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">Real Estate Investors</h3>
+                            <div class="mt-2 max-w-xl text-sm text-gray-500">
+                                <p>Evaluate property potential before purchasing by analyzing neighborhood amenities, services, and growth indicators.</p>
+                            </div>
+                            <div class="mt-3 text-sm">
+                                <a href="https://app.locas.dev/" target="_blank" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                    Try it out <span aria-hidden="true">&rarr;</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Use Case 2 -->
+                    <div class="bg-white overflow-hidden shadow rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">Entrepreneurs</h3>
+                            <div class="mt-2 max-w-xl text-sm text-gray-500">
+                                <p>Determine the best location for your new business venture by analyzing foot traffic, competition, and demographic data.</p>
+                            </div>
+                            <div class="mt-3 text-sm">
+                                <a href="https://app.locas.dev/" target="_blank" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                    Try it out <span aria-hidden="true">&rarr;</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Use Case 3 -->
+                    <div class="bg-white overflow-hidden shadow rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">Urban Planners</h3>
+                            <div class="mt-2 max-w-xl text-sm text-gray-500">
+                                <p>Make data-driven decisions for urban development by understanding existing infrastructure and identifying service gaps.</p>
+                            </div>
+                            <div class="mt-3 text-sm">
+                                <a href="https://app.locas.dev/" target="_blank" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                    Try it out <span aria-hidden="true">&rarr;</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Use Case 4 -->
+                    <div class="bg-white overflow-hidden shadow rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">Developers & Contributors</h3>
+                            <div class="mt-2 max-w-xl text-sm text-gray-500">
+                                <p>Contribute to an open-source project that combines the power of AI with geospatial analysis, or build your own applications on top of our platform.</p>
+                            </div>
+                            <div class="mt-3 text-sm">
+                                <a href="https://github.com/azharlabs/locas" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                    View on GitHub <span aria-hidden="true">&rarr;</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Use Case 5 -->
+                    <div class="bg-white overflow-hidden shadow rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">Homebuyers</h3>
+                            <div class="mt-2 max-w-xl text-sm text-gray-500">
+                                <p>Find the perfect neighborhood for your family by analyzing schools, parks, safety, and environmental factors.</p>
+                            </div>
+                            <div class="mt-3 text-sm">
+                                <a href="https://app.locas.dev/" target="_blank" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                    Try it out <span aria-hidden="true">&rarr;</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Use Case 6 -->
+                    <div class="bg-white overflow-hidden shadow rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">Retail Chain Owners</h3>
+                            <div class="mt-2 max-w-xl text-sm text-gray-500">
+                                <p>Expand your business strategically by identifying optimal locations for new stores based on market analysis.</p>
+                            </div>
+                            <div class="mt-3 text-sm">
+                                <a href="https://app.locas.dev/" target="_blank" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                    Try it out <span aria-hidden="true">&rarr;</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div id="how-it-works" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">How It Works</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Open-source AI orchestration
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Our platform coordinates multiple AI models and services to deliver seamless location intelligence that's accessible to everyone.
+                </p>
+            </div>
+
+            <div class="mt-10">
+                <div class="relative">
+                    <!-- Process Steps -->
+                    <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
+                        <!-- Step 1 -->
+                        <div class="relative">
+                            <div class="flex items-center justify-center w-12 h-12 mx-auto bg-indigo-500 rounded-full text-white">
+                                <span class="text-lg font-bold">1</span>
+                            </div>
+                            <div class="mt-4 text-center">
+                                <h3 class="text-lg font-medium text-gray-900">Enter Your Query</h3>
+                                <p class="mt-2 text-base text-gray-500">
+                                    Ask a question about a location by entering an address, coordinates, or a Google Maps URL.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="relative">
+                            <div class="flex items-center justify-center w-12 h-12 mx-auto bg-indigo-500 rounded-full text-white">
+                                <span class="text-lg font-bold">2</span>
+                            </div>
+                            <div class="mt-4 text-center">
+                                <h3 class="text-lg font-medium text-gray-900">AI Orchestration</h3>
+                                <p class="mt-2 text-base text-gray-500">
+                                    Our platform coordinates multiple AI services, APIs, and data sources to analyze your location request.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="relative">
+                            <div class="flex items-center justify-center w-12 h-12 mx-auto bg-indigo-500 rounded-full text-white">
+                                <span class="text-lg font-bold">3</span>
+                            </div>
+                            <div class="mt-4 text-center">
+                                <h3 class="text-lg font-medium text-gray-900">Get Insights</h3>
+                                <p class="mt-2 text-base text-gray-500">
+                                    Receive a comprehensive analysis with ratings, recommendations, and interactive maps to make informed decisions.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Section -->
+    <div id="demo" class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-10">
+                <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Try It Out</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    See the power of AI orchestration
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+                <div class="px-6 py-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Try Locas AI Orchestrator</h2>
+                    <p class="text-gray-600 mb-6">
+                        Ask a question about any location to see our open-source AI orchestration platform in action. We coordinate multiple AI services to deliver comprehensive insights through a unified interface.
+                    </p>
+                    <div class="flex flex-wrap gap-2 bg-gray-50 p-3 rounded-lg mb-6 border border-gray-200">
+                        <div class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full flex items-center">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full mr-1"></span>OpenAI
+                        </div>
+                        <div class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full flex items-center">
+                            <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>Google Maps API
+                        </div>
+                        <div class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full flex items-center">
+                            <span class="w-2 h-2 bg-purple-500 rounded-full mr-1"></span>Environmental Data
+                        </div>
+                        <div class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full flex items-center">
+                            <span class="w-2 h-2 bg-yellow-500 rounded-full mr-1"></span>Web Search
+                        </div>
+                        <div class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full flex items-center">
+                            <span class="w-2 h-2 bg-red-500 rounded-full mr-1"></span>Location Parser
+                        </div>
+                    </div>
+                    
+                    <form id="demo-form" class="mb-6">
+                        <div class="flex flex-col md:flex-row md:items-center">
+                            <div class="flex-grow mb-3 md:mb-0 md:mr-3">
+                                <input type="text" id="query-input" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="E.g., Can I buy land near Central Park, New York?">
+                            </div>
+                            <a href="https://app.locas.dev/" target="_blank" id="analyze-btn" class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Run Analysis
+                            </a>
+                        </div>
+                    </form>
+                    
+                    <div class="mb-6">
+                        <p class="text-sm text-gray-500 mb-2">Try these examples:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="example-query px-3 py-1 text-sm bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100">
+                                Are there any parks near Empire State Building?
+                            </button>
+                            <button class="example-query px-3 py-1 text-sm bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100">
+                                Can I start a coffee shop at 37.7749, -122.4194?
+                            </button>
+                            <button class="example-query px-3 py-1 text-sm bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100">
+                                Can I buy land near Central Park, New York?
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Loading state (hidden by default) -->
+                    <div id="loading-state" class="hidden flex flex-col items-center justify-center py-8">
+                        <div class="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+                        <p class="mt-3 text-indigo-600">Orchestrating AI services...</p>
+                        <div class="mt-4 flex flex-wrap justify-center gap-2">
+                            <div class="flex items-center px-2 py-1 bg-gray-100 rounded-md text-xs">
+                                <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1 animate-pulse"></div>
+                                Finding location
+                            </div>
+                            <div class="flex items-center px-2 py-1 bg-gray-100 rounded-md text-xs">
+                                <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-1 animate-pulse"></div>
+                                Analyzing proximity
+                            </div>
+                            <div class="flex items-center px-2 py-1 bg-gray-100 rounded-md text-xs">
+                                <div class="w-1.5 h-1.5 bg-purple-500 rounded-full mr-1 animate-pulse"></div>
+                                Processing environmental data
+                            </div>
+                            <div class="flex items-center px-2 py-1 bg-gray-100 rounded-md text-xs">
+                                <div class="w-1.5 h-1.5 bg-yellow-500 rounded-full mr-1 animate-pulse"></div>
+                                Generating insights
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Result panel (hidden by default) -->
+                    <div id="result-panel" class="hidden bg-gray-50 rounded-lg border border-gray-200 p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-3 h-3 rounded-full mr-2 bg-green-500"></div>
+                            <h3 class="text-lg font-medium text-gray-900" id="result-title">Land Purchase Analysis</h3>
+                        </div>
+                        
+                        <p class="text-gray-500 mb-4" id="result-location">Near Central Park, New York</p>
+                        
+                        <div class="mb-4" id="result-ratings">
+                            <h4 class="text-md font-medium text-gray-700 mb-2">Analysis Factors:</h4>
+                            <div class="space-y-3" id="ratings-container">
+                                <!-- Ratings will be inserted here by JavaScript -->
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 mt-3 bg-indigo-50 rounded-md border border-indigo-100">
+                                <span class="font-bold text-gray-800">Overall Rating</span>
+                                <div class="px-3 py-1 bg-indigo-600 text-white rounded-md text-lg font-bold" id="overall-rating">
+                                    8.5/10
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t pt-4">
+                            <h4 class="text-md font-medium text-gray-700 mb-2">Summary:</h4>
+                            <p class="text-gray-600" id="result-summary">This is a prime location for land purchase with excellent amenities and services. However, property values are likely to be very high in this area.</p>
+                        </div>
+                        
+                        <div class="mt-6 border-t pt-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="text-md font-medium text-gray-700">AI Services Used:</h4>
+                                <a href="https://app.locas.dev/" target="_blank" class="text-xs font-medium text-indigo-600 hover:text-indigo-500">View Trace</a>
+                            </div>
+                            <div class="flex flex-wrap gap-2" id="services-used">
+                                <div class="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded border border-blue-100 flex items-center">
+                                    <span class="w-2 h-2 bg-blue-500 rounded-full mr-1"></span>GPT-4o
+                                </div>
+                                <div class="px-2 py-1 bg-green-50 text-green-700 text-xs rounded border border-green-100 flex items-center">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>Google Places API
+                                </div>
+                                <div class="px-2 py-1 bg-purple-50 text-purple-700 text-xs rounded border border-purple-100 flex items-center">
+                                    <span class="w-2 h-2 bg-purple-500 rounded-full mr-1"></span>Environmental Service
+                                </div>
+                                <div class="px-2 py-1 bg-red-50 text-red-700 text-xs rounded border border-red-100 flex items-center">
+                                    <span class="w-2 h-2 bg-red-500 rounded-full mr-1"></span>Land Analyzer
+                                </div>
+                            </div>
+                            <div class="mt-3 bg-gray-50 p-3 rounded-md border border-gray-200 text-xs text-gray-500">
+                                <div class="flex justify-between mb-1">
+                                    <span>Total orchestration time:</span>
+                                    <span class="font-medium">1.2s</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>API calls:</span>
+                                    <span class="font-medium">4</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="gradient-bg">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+            <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                <span class="block">Ready to make smarter location decisions?</span>
+                <span class="block text-indigo-100">Start using Locas today.</span>
+            </h2>
+            <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+                <div class="inline-flex rounded-md shadow">
+                    <a href="https://app.locas.dev/" target="_blank" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50">
+                        Get Started
+                    </a>
+                </div>
+                <div class="ml-3 inline-flex rounded-md shadow">
+                    <a href="https://github.com/azharlabs/locas" target="_blank" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-800 hover:bg-indigo-900">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0110 4.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C17.14 18.163 20 14.418 20 10c0-5.523-4.477-10-10-10z" clip-rule="evenodd" />
+                        </svg>
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
+                <div class="px-5 py-2">
+                    <a href="https://app.locas.dev/" target="_blank" class="text-base text-gray-500 hover:text-gray-900">About</a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="https://app.locas.dev/" target="_blank" class="text-base text-gray-500 hover:text-gray-900">Features</a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="https://app.locas.dev/" target="_blank" class="text-base text-gray-500 hover:text-gray-900">Documentation</a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="https://app.locas.dev/" target="_blank" class="text-base text-gray-500 hover:text-gray-900">API</a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="https://app.locas.dev/" target="_blank" class="text-base text-gray-500 hover:text-gray-900">Contributing</a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="https://app.locas.dev/" target="_blank" class="text-base text-gray-500 hover:text-gray-900">Contact</a>
+                </div>
+            </nav>
+            <div class="mt-8 flex justify-center space-x-6">
+                <a href="https://github.com/azharlabs/locas" class="text-gray-400 hover:text-gray-500">
+                    <span class="sr-only"> View on GitHub</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+                <a href="https://app.locas.dev/" target="_blank" class="text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">Discord</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M18.93 5.343c-1.56-.7-3.22-1.2-4.93-1.347a14.99 14.99 0 00-.67 1.34 17.43 17.43 0 00-5.055 0c-.15-.463-.4-.93-.67-1.34-1.71.15-3.37.64-4.9 1.32A19.1 19.1 0 00.64 16.58a19.34 19.34 0 005.87 2.982c.47-.642.89-1.326 1.25-2.04a12.82 12.82 0 01-1.96-1.01l.34-.34c1.05.48 2.14.87 3.2 1.13a14.97 14.97 0 004.27 0 17.3 17.3 0 003.2-1.13c.16.126.27.251.34.34-.61.39-1.27.73-1.96 1.01a13.6 13.6 0 001.24 2.03 19.1 19.1 0 005.88-2.97 19.03 19.03 0 00-3.09-11.237m-9.6 8.953c-.85 0-1.56-.8-1.56-1.774 0-.98.69-1.79 1.56-1.79.88 0 1.58.81 1.56 1.79 0 .975-.69 1.774-1.56 1.774m5.7 0c-.85 0-1.55-.8-1.55-1.774 0-.98.7-1.79 1.55-1.79.88 0 1.58.81 1.57 1.79 0 .975-.65 1.774-1.57 1.774" clip-rule="evenodd" />
+                    </svg>
+                </a>
+                <a href="https://app.locas.dev/" target="_blank" class="text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">Twitter</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                    </svg>
+                </a>
+            </div>
+            <p class="mt-8 text-center text-base text-gray-400">
+                &copy; 2025 Locas. Open source under MIT License.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for demo functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const demoForm = document.getElementById('demo-form');
+            const queryInput = document.getElementById('query-input');
+            const loadingState = document.getElementById('loading-state');
+            const resultPanel = document.getElementById('result-panel');
+            const resultTitle = document.getElementById('result-title');
+            const resultLocation = document.getElementById('result-location');
+            const ratingsContainer = document.getElementById('ratings-container');
+            const overallRating = document.getElementById('overall-rating');
+            const resultSummary = document.getElementById('result-summary');
+            const servicesUsed = document.getElementById('services-used');
+            
+            // Example queries click event
+            document.querySelectorAll('.example-query').forEach(button => {
+                button.addEventListener('click', function() {
+                    queryInput.value = this.textContent.trim();
+                });
+            });
+            
+            // Form submission
+            demoForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const query = queryInput.value.trim();
+                
+                if (!query) return;
+                
+                // Show loading state
+                loadingState.classList.remove('hidden');
+                resultPanel.classList.add('hidden');
+                
+                // Simulate API call with timeout
+                setTimeout(() => {
+                    // Hide loading state
+                    loadingState.classList.add('hidden');
+                    
+                    // Process result based on query
+                    processResult(query);
+                    
+                    // Show result panel
+                    resultPanel.classList.remove('hidden');
+                }, 2000);
+            });
+            
+            function processResult(query) {
+                let data = {};
+                
+                // Land purchase query
+                if (query.toLowerCase().includes('land')) {
+                    data = {
+                        title: 'Land Purchase Analysis',
+                        location: 'Near specified location',
+                        ratings: [
+                            { factor: 'Essential Services', rating: 9, description: 'Excellent access to schools, hospitals, and police' },
+                            { factor: 'Amenities', rating: 10, description: 'Outstanding selection of shops, restaurants, and entertainment' },
+                            { factor: 'Transportation', rating: 8, description: 'Multiple subway stations and bus routes nearby' },
+                            { factor: 'Environmental Factors', rating: 7, description: 'Good air quality, access to green spaces' }
+                        ],
+                        overallRating: 8.5,
+                        summary: 'This is a prime location for land purchase with excellent amenities and services. However, property values are likely to be very high in this area.',
+                        services: ['GPT-4o', 'Google Places API', 'Environmental Service', 'Land Analyzer']
+                    };
+                }
+                // Business-related query
+                else if (query.toLowerCase().includes('coffee') || query.toLowerCase().includes('restaurant') || query.toLowerCase().includes('business')) {
+                    data = {
+                        title: 'Business Viability Analysis',
+                        location: 'Near specified location',
+                        ratings: [
+                            { factor: 'Customer Traffic', rating: 8, description: 'High pedestrian traffic in this area' },
+                            { factor: 'Competition', rating: 6, description: '3 similar businesses within 0.5 miles' },
+                            { factor: 'Demographics', rating: 9, description: 'Target customers present in high numbers' },
+                            { factor: 'Location Accessibility', rating: 7, description: 'Good public transport, limited parking' }
+                        ],
+                        overallRating: 7.5,
+                        summary: 'This location shows good potential for a business with high foot traffic and favorable demographics. However, be aware of competition in the area.',
+                        services: ['GPT-4o', 'Google Places API', 'Environmental Service', 'Business Analyzer']
+                    };
+                }
+                // Park or amenity query
+                else if (query.toLowerCase().includes('park') || query.toLowerCase().includes('school') || query.toLowerCase().includes('hospital')) {
+                    data = {
+                        title: 'Nearby Places Analysis',
+                        location: 'Near specified location',
+                        ratings: [
+                            { factor: 'Quantity', rating: 8, description: 'Multiple options available within 1 mile' },
+                            { factor: 'Quality', rating: 9, description: 'High-rated facilities with good reviews' },
+                            { factor: 'Accessibility', rating: 7, description: 'Easily accessible by public transportation' }
+                        ],
+                        overallRating: 8.0,
+                        summary: 'There are several high-quality options in the vicinity. The area has excellent access to the amenities you searched for.',
+                        services: ['GPT-4o', 'Google Places API', 'Location Parser']
+                    };
+                }
+                // Default response
+                else {
+                    data = {
+                        title: 'Location Analysis',
+                        location: 'Near specified location',
+                        ratings: [
+                            { factor: 'Overall Rating', rating: 7, description: 'Good location with standard amenities' }
+                        ],
+                        overallRating: 7.0,
+                        summary: 'We found some information about your location, but for more specific insights, try including keywords like "land", "business", or specific amenities.',
+                        services: ['GPT-4o', 'Google Places API']
+                    };
+                }
+                
+                // Update UI with result
+                resultTitle.textContent = data.title;
+                resultLocation.textContent = data.location;
+                
+                // Clear and repopulate ratings
+                ratingsContainer.innerHTML = '';
+                data.ratings.forEach(rating => {
+                    const ratingEl = document.createElement('div');
+                    ratingEl.className = 'bg-white p-3 rounded border';
+                    ratingEl.innerHTML = `
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">${rating.factor}</span>
+                            <div class="px-2 py-1 bg-indigo-100 text-indigo-800 rounded text-sm font-medium">
+                                ${rating.rating}/10
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600">${rating.description}</p>
+                    `;
+                    ratingsContainer.appendChild(ratingEl);
+                });
+                
+                overallRating.textContent = `${data.overallRating}/10`;
+                resultSummary.textContent = data.summary;
+                
+                // Update services used
+                servicesUsed.innerHTML = '';
+                const colors = {
+                    'GPT-4o': 'blue',
+                    'Google Places API': 'green',
+                    'Environmental Service': 'purple',
+                    'Land Analyzer': 'red',
+                    'Business Analyzer': 'yellow',
+                    'Location Parser': 'pink'
+                };
+                
+                data.services.forEach(service => {
+                    const color = colors[service] || 'gray';
+                    const serviceEl = document.createElement('div');
+                    serviceEl.className = `px-2 py-1 bg-${color}-50 text-${color}-700 text-xs rounded border border-${color}-100 flex items-center`;
+                    serviceEl.innerHTML = `
+                        <span class="w-2 h-2 bg-${color}-500 rounded-full mr-1"></span>${service}
+                    `;
+                    servicesUsed.appendChild(serviceEl);
+                });
+            }
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
