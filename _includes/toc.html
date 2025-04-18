@@ -1,0 +1,18 @@
+{% comment %}
+  Automatically generate a table of contents from the page's headings
+  Usage: {% include toc.html %}
+{% endcomment %}
+
+<div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6">
+  <h4 class="text-lg font-medium text-gray-900 mb-3">Table of Contents</h4>
+  <ul class="space-y-1 text-gray-600">
+    {% for heading in include.content %}
+      {% if heading.level >= 2 and heading.level <= 4 %}
+        {% assign indent = heading.level | minus: 2 | times: 16 %}
+        <li style="margin-left: {{ indent }}px">
+          <a href="#{{ heading.id }}" class="hover:text-indigo-600 hover:underline">{{ heading.text }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>

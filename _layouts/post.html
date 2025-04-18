@@ -1,0 +1,62 @@
+---
+layout: default
+---
+
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <article class="prose lg:prose-xl mx-auto">
+        <header class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{{ page.title }}</h1>
+            
+            <div class="flex items-center text-gray-500 text-sm mb-4">
+                <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+                <span class="mx-2">•</span>
+                {% assign author = site.authors | where: "id", page.author | first %}
+                {% if author %}
+                <a href="{{ author.url }}" class="hover:text-indigo-600">{{ author.name }}</a>
+                {% else %}
+                <span>Locas Team</span>
+                {% endif %}
+                <span class="mx-2">•</span>
+                <span>{{ page.content | number_of_words | divided_by: 250 | plus: 1 }} min read</span>
+            </div>
+            
+            {% if page.featured_image %}
+            <figure class="mb-6">
+                <img src="{{ page.featured_image }}" alt="{{ page.title }}" class="rounded-lg shadow-md w-full">
+                {% if page.image_caption %}
+                <figcaption class="text-sm text-gray-500 mt-2 text-center">{{ page.image_caption }}</figcaption>
+                {% endif %}
+            </figure>
+            {% endif %}
+        </header>
+        
+        {{ content }}
+        
+        <footer class="mt-12 pt-6 border-t border-gray-200">
+            <div class="flex flex-wrap gap-2">
+                {% for tag in page.tags %}
+                <a href="/blog/tags/{{ tag | slugify }}" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full text-sm text-gray-700">#{{ tag }}</a>
+                {% endfor %}
+            </div>
+            
+            <div class="mt-8 bg-indigo-50 p-6 rounded-lg">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">About the Author</h3>
+                {% assign author = site.authors | where: "id", page.author | first %}
+                {% if author %}
+                <div class="flex items-start">
+                    {% if author.avatar %}
+                    <img src="{{ author.avatar }}" alt="{{ author.name }}" class="w-16 h-16 rounded-full mr-4">
+                    {% endif %}
+                    <div>
+                        <h4 class="text-lg font-medium text-gray-900">{{ author.name }}</h4>
+                        <p class="text-gray-500 text-sm mb-3">{{ author.position }}</p>
+                        <p>{{ author.content }}</p>
+                    </div>
+                </div>
+                {% else %}
+                <p>Written by the Locas Team</p>
+                {% endif %}
+            </div>
+        </footer>
+    </article>
+</div>

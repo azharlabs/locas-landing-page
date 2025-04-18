@@ -1,0 +1,78 @@
+---
+layout: default
+title: Blog
+---
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-3xl mx-auto">
+        <h1 class="text-3xl font-extrabold text-gray-900 mb-6">Latest Articles</h1>
+        
+        <div class="space-y-10">
+            {% for post in site.posts %}
+            <article class="bg-white p-6 rounded-lg shadow-md">
+                <div class="sm:flex sm:items-center sm:justify-between mb-4">
+                    <div>
+                        <time datetime="{{ post.date | date_to_xmlschema }}" class="text-sm text-gray-500">{{ post.date | date: "%B %-d, %Y" }}</time>
+                    </div>
+                    <div class="mt-2 sm:mt-0">
+                        {% for tag in post.tags %}
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 mr-1">
+                            #{{ tag }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <a href="{{ post.url }}" class="block">
+                    <h2 class="text-2xl font-bold text-gray-900 hover:text-indigo-600">{{ post.title }}</h2>
+                </a>
+                
+                {% if post.featured_image %}
+                <a href="{{ post.url }}" class="block mt-4">
+                    <img src="{{ post.featured_image }}" alt="{{ post.title }}" class="w-full h-64 object-cover rounded-lg">
+                    {% if post.image_caption %}
+                    <p class="text-sm text-gray-500 mt-1">{{ post.image_caption }}</p>
+                    {% endif %}
+                </a>
+                {% endif %}
+                
+                <div class="mt-4 text-gray-500">
+                    {{ post.excerpt | strip_html | truncatewords: 50 }}
+                </div>
+                
+                <div class="mt-6 flex items-center">
+                    {% assign author = site.authors | where: "id", post.author | first %}
+                    {% if author %}
+                    {% if author.avatar %}
+                    <div class="flex-shrink-0">
+                        <a href="{{ author.url }}">
+                            <img class="h-10 w-10 rounded-full" src="{{ author.avatar }}" alt="{{ author.name }}">
+                        </a>
+                    </div>
+                    {% endif %}
+                    <div class="ml-3">
+                        <p class="text-sm font-medium text-gray-900">
+                            <a href="{{ author.url }}" class="hover:text-indigo-600">{{ author.name }}</a>
+                        </p>
+                        <div class="text-sm text-gray-500">
+                            {{ author.position }}
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="ml-3">
+                        <p class="text-sm font-medium text-gray-900">Locas Team</p>
+                        <div class="text-sm text-gray-500">Core Contributors</div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="ml-auto">
+                        <a href="{{ post.url }}" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Read more <span aria-hidden="true" class="ml-1">→</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</div>

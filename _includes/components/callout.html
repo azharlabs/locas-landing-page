@@ -1,0 +1,48 @@
+{% comment %}
+  Usage: 
+  {% include components/callout.html 
+    type="info"
+    title="Did you know?"
+    content="This is a callout box with some important information."
+  %}
+  
+  Available types: info, warning, success, danger
+{% endcomment %}
+
+{% assign bg_color = "bg-blue-50" %}
+{% assign text_color = "text-blue-800" %}
+{% assign border_color = "border-blue-100" %}
+{% assign icon = "fas fa-info-circle" %}
+
+{% if include.type == "warning" %}
+  {% assign bg_color = "bg-yellow-50" %}
+  {% assign text_color = "text-yellow-800" %}
+  {% assign border_color = "border-yellow-100" %}
+  {% assign icon = "fas fa-exclamation-triangle" %}
+{% elsif include.type == "success" %}
+  {% assign bg_color = "bg-green-50" %}
+  {% assign text_color = "text-green-800" %}
+  {% assign border_color = "border-green-100" %}
+  {% assign icon = "fas fa-check-circle" %}
+{% elsif include.type == "danger" %}
+  {% assign bg_color = "bg-red-50" %}
+  {% assign text_color = "text-red-800" %}
+  {% assign border_color = "border-red-100" %}
+  {% assign icon = "fas fa-exclamation-circle" %}
+{% endif %}
+
+<div class="p-4 mb-4 {{ bg_color }} border rounded-md {{ border_color }}">
+  <div class="flex items-start">
+    <div class="flex-shrink-0">
+      <i class="{{ icon }} {{ text_color }}"></i>
+    </div>
+    <div class="ml-3">
+      {% if include.title %}
+      <h3 class="text-sm font-medium {{ text_color }}">{{ include.title }}</h3>
+      {% endif %}
+      <div class="mt-2 text-sm {{ text_color }}">
+        {{ include.content }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+name: Build and deploy Jekyll site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  github-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+
+      - name: Build and deploy
+        uses: jeffreytse/jekyll-deploy-action@v0.4.0
+        with:
+          provider: 'github'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          cname: 'locas.dev'                    # Default is to deploy to gh-pages branch
+          jekyll_src: './'                      # Default is root directory
+          jekyll_cfg: '_config.yml'             # Default is _config.yml
+          branch: 'gh-pages'                    # Default is gh-pages
